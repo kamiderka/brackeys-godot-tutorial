@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://b5rpos467agc8"]
+
+[ext_resource type="AudioStream" uid="uid://c3hjw86c4phcq" path="res://assets/music/Boulder Dash Game Music Atari 2600.mp3" id="1_0n6ya"]
+
+[node name="Music" type="AudioStreamPlayer2D"]
+stream = ExtResource("1_0n6ya")
+volume_db = 1.0
+autoplay = true
+bus = &"Music"
+parameters/looping = true

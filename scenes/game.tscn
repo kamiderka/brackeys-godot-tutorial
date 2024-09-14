@@ -321,10 +321,22 @@ theme_override_fonts/font = ExtResource("7_gg585")
 theme_override_font_sizes/font_size = 16
 text = "Beware! The enemy!"
 
+[node name="Label3" type="Label" parent="Labels"]
+offset_left = 242.0
+offset_top = -6.0
+offset_right = 482.0
+offset_bottom = 48.0
+scale = Vector2(0.4, 0.4)
+theme_override_fonts/font = ExtResource("7_gg585")
+theme_override_font_sizes/font_size = 16
+text = "A moving platform! 
+
+Interesting..."
+
 [node name="ScoreLabel" type="Label" parent="Labels"]
-offset_left = 778.0
+offset_left = 779.0
 offset_top = -22.0
-offset_right = 1034.0
+offset_right = 1035.0
 offset_bottom = 18.0
 scale = Vector2(0.5, 0.5)
 theme_override_fonts/font = ExtResource("7_gg585")
