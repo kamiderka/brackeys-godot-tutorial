@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=3 uid="uid://borcjokqyxorb"]
+[gd_scene load_steps=13 format=3 uid="uid://borcjokqyxorb"]
 
 [ext_resource type="PackedScene" uid="uid://pkyo1jlt7nel" path="res://scenes/player.tscn" id="1_3tlim"]
 [ext_resource type="Texture2D" uid="uid://bs486of4s5kci" path="res://assets/sprites/world_tileset.png" id="1_va2en"]
 [ext_resource type="PackedScene" uid="uid://c1kt61ro23fvc" path="res://scenes/platform.tscn" id="3_oobge"]
 [ext_resource type="PackedScene" uid="uid://bqbva0dq5utm4" path="res://scenes/coin.tscn" id="4_hulqd"]
+[ext_resource type="PackedScene" uid="uid://0bfyevxbfyak" path="res://scenes/killzone.tscn" id="5_ff216"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q7gtx"]
 
@@ -172,22 +173,6 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/physics_material = SubResource("PhysicsMaterial_q7gtx")
 sources/1 = SubResource("TileSetAtlasSource_a7anu")
 
-[sub_resource type="Animation" id="Animation_o3l2l"]
-resource_name = "move"
-loop_mode = 2
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(1, 1),
-"update": 0,
-"values": [Vector2(273, 53), Vector2(398, 53)]
-}
-
 [sub_resource type="Animation" id="Animation_u6lqq"]
 length = 1.5
 loop_mode = 2
@@ -204,11 +189,30 @@ tracks/0/keys = {
 "values": [Vector2(273, 53), Vector2(397, 53)]
 }
 
+[sub_resource type="Animation" id="Animation_o3l2l"]
+resource_name = "move"
+loop_mode = 2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(273, 53), Vector2(398, 53)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4p6dt"]
 _data = {
 "RESET": SubResource("Animation_u6lqq"),
 "move": SubResource("Animation_o3l2l")
 }
+
+[sub_resource type="WorldBoundaryShape2D" id="WorldBoundaryShape2D_5mqkf"]
+distance = -12.0
 
 [node name="Game" type="Node2D"]
 
@@ -218,11 +222,13 @@ format = 2
 layer_0/tile_data = PackedInt32Array(196606, 1, 0, 196607, 1, 0, 131072, 1, 0, 262142, 1, 1, 262143, 65537, 0, 196608, 1, 1, 327678, 1, 1, 327679, 65537, 0, 262144, 65537, 0, 196609, 1, 0, 262145, 1, 1, 262146, 65537, 0, 262147, 1, 1, 196611, 1, 0, 196612, 1, 268435456, 262148, 1, 1, 196613, 1, 1, 262149, 1, 1, 196617, 131073, 0, 196618, 131073, 0, 196619, 131073, 0, 262153, 131073, 1, 262154, 131073, 1, 262155, 131073, 1, 327689, 131073, 1, 327690, 131073, 1, 327691, 131073, 1, 393225, 131073, 1, 458761, 131073, 1, 524298, 131073, 1, 458762, 131073, 1, 393226, 131073, 1, 393227, 131073, 1, 458763, 131073, 1, 524297, 131073, 1, 589833, 131073, 1, 655369, 131073, 1, 655370, 131073, 1, 589835, 131073, 1, 524299, 131073, 1, 589834, 131073, 1, 655371, 131073, 1, 196614, 589825, 0, 196615, 655361, 0, 196616, 720897, 0, 196622, 393217, 0, 196623, 393217, 0, 196610, 1, 0, 131076, 1, 0, 196634, 262145, 0, 262170, 262145, 1, 327706, 262145, 1, 393242, 262145, 1, 458778, 262145, 1, 524314, 262145, 1, 589850, 262145, 1, 655386, 262145, 1, 196635, 262145, 0, 262171, 262145, 1, 327707, 262145, 1, 393243, 262145, 1, 458779, 262145, 1, 524315, 262145, 1, 589851, 262145, 1, 655387, 262145, 1, 196636, 262145, 0, 262172, 262145, 1, 327708, 262145, 1, 393244, 262145, 1, 458780, 262145, 1, 524316, 262145, 1, 589852, 262145, 1, 655388, 262145, 1, 196637, 262145, 0, 262173, 262145, 1, 327709, 262145, 1, 393245, 262145, 1, 458781, 262145, 1, 524317, 262145, 1, 589853, 262145, 1, 655389, 262145, 1)
 
 [node name="Player" parent="." instance=ExtResource("1_3tlim")]
-position = Vector2(-7, 1)
+position = Vector2(-10, 20)
+collision_layer = 2
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2(7, -1)
+position = Vector2(0, -1)
 zoom = Vector2(4, 4)
+limit_bottom = 120
 
 [node name="Platforms" type="Node2D" parent="."]
 
@@ -263,3 +269,12 @@ position = Vector2(439, 34)
 
 [node name="Coin8" parent="Coins" instance=ExtResource("4_hulqd")]
 position = Vector2(458, 34)
+
+[node name="Coin9" parent="Coins" instance=ExtResource("4_hulqd")]
+position = Vector2(265, 53)
+
+[node name="Killzone" parent="." instance=ExtResource("5_ff216")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Killzone"]
+position = Vector2(-1, 101)
+shape = SubResource("WorldBoundaryShape2D_5mqkf")

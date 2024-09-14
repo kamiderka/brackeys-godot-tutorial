@@ -1,6 +1,6 @@
 [gd_scene load_steps=17 format=3 uid="uid://bqbva0dq5utm4"]
 
-[ext_resource type="Script" path="res://scenes/coin.gd" id="1_ihgxy"]
+[ext_resource type="Script" path="res://scripts/coin.gd" id="1_ihgxy"]
 [ext_resource type="Texture2D" uid="uid://l1xudl3ragav" path="res://assets/sprites/coin.png" id="1_infg6"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x27ew"]
@@ -99,6 +99,7 @@ animations = [{
 radius = 5.0
 
 [node name="Coin" type="Area2D"]
+collision_mask = 2
 script = ExtResource("1_ihgxy")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
