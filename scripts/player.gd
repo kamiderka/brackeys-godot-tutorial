@@ -4,6 +4,7 @@ extends CharacterBody2D
 const SPEED = 130.0
 const JUMP_VELOCITY = -300
 
+@onready var sword: Area2D = $Sword
 @onready var player_sprite: AnimatedSprite2D = $AnimatedSprite2D
 
 func start():
@@ -34,8 +35,11 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		if direction > 0:
 			player_sprite.flip_h = false
+			sword.set_left = false
+			
 		else:
 			player_sprite.flip_h = true
+			sword.set_left = true
 			
 		velocity.x = direction * SPEED
 	else:
