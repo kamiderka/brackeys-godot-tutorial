@@ -2,10 +2,10 @@
 
 [ext_resource type="PackedScene" uid="uid://pkyo1jlt7nel" path="res://scenes/player.tscn" id="1_3tlim"]
 [ext_resource type="Texture2D" uid="uid://bs486of4s5kci" path="res://assets/sprites/world_tileset.png" id="1_va2en"]
+[ext_resource type="PackedScene" uid="uid://4b55sj2wtn8u" path="res://scenes/slime.tscn" id="3_1r8dg"]
 [ext_resource type="PackedScene" uid="uid://c1kt61ro23fvc" path="res://scenes/platform.tscn" id="3_oobge"]
 [ext_resource type="PackedScene" uid="uid://bqbva0dq5utm4" path="res://scenes/coin.tscn" id="4_hulqd"]
 [ext_resource type="PackedScene" uid="uid://0bfyevxbfyak" path="res://scenes/killzone.tscn" id="5_ff216"]
-[ext_resource type="PackedScene" uid="uid://cfb754owhiw26" path="res://scenes/slime.tscn" id="6_5cuka"]
 [ext_resource type="FontFile" uid="uid://nqntevadah0q" path="res://assets/fonts/PixelOperator8.ttf" id="7_gg585"]
 [ext_resource type="PackedScene" uid="uid://h40vw6uvmcev" path="res://scenes/checkpoint.tscn" id="9_237lw"]
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="9_wmh0f"]
@@ -300,9 +300,6 @@ position = Vector2(265, 53)
 position = Vector2(-1, 101)
 shape = SubResource("WorldBoundaryShape2D_5mqkf")
 
-[node name="Slime" parent="." instance=ExtResource("6_5cuka")]
-position = Vector2(598, 68)
-
 [node name="Labels" type="Node2D" parent="."]
 
 [node name="Label" type="Label" parent="Labels"]
@@ -350,6 +347,9 @@ horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
 
+[node name="Mob" parent="." instance=ExtResource("3_1r8dg")]
+position = Vector2(31, 34)
+
 [node name="Checkpoints" type="Node" parent="."]
 
 [node name="Checkpoint" parent="Checkpoints" instance=ExtResource("9_237lw")]
@@ -357,6 +357,9 @@ position = Vector2(182, 26)
 
 [node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("9_237lw")]
 position = Vector2(554, 26)
+
+[node name="Mob2" parent="." instance=ExtResource("3_1r8dg")]
+position = Vector2(594, 67)
 
 [connection signal="body_entered" from="Checkpoints/Checkpoint" to="Checkpoints/Checkpoint" method="_on_body_entered"]
 [connection signal="body_entered" from="Checkpoints/Checkpoint2" to="Checkpoints/Checkpoint2" method="_on_body_entered"]

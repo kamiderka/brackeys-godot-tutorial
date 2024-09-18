@@ -1,4 +1,7 @@
-extends Node2D
+extends CharacterBody2D
+
+
+var health := 10
 
 const SPEED = 60
 
@@ -17,3 +20,7 @@ func _process(delta: float) -> void:
 		sprite.flip_h = true
 		
 	position.x += direction * SPEED * delta
+	
+
+func take_damage(value : int) -> void:
+	self.queue_free()
