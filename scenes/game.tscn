@@ -1,13 +1,14 @@
-[gd_scene load_steps=16 format=4 uid="uid://borcjokqyxorb"]
+[gd_scene load_steps=17 format=4 uid="uid://borcjokqyxorb"]
 
 [ext_resource type="PackedScene" uid="uid://pkyo1jlt7nel" path="res://scenes/player.tscn" id="1_3tlim"]
-[ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_78xic"]
 [ext_resource type="Texture2D" uid="uid://bs486of4s5kci" path="res://assets/sprites/world_tileset.png" id="1_va2en"]
 [ext_resource type="PackedScene" uid="uid://c1kt61ro23fvc" path="res://scenes/platform.tscn" id="3_oobge"]
 [ext_resource type="PackedScene" uid="uid://bqbva0dq5utm4" path="res://scenes/coin.tscn" id="4_hulqd"]
 [ext_resource type="PackedScene" uid="uid://0bfyevxbfyak" path="res://scenes/killzone.tscn" id="5_ff216"]
 [ext_resource type="PackedScene" uid="uid://cfb754owhiw26" path="res://scenes/slime.tscn" id="6_5cuka"]
 [ext_resource type="FontFile" uid="uid://nqntevadah0q" path="res://assets/fonts/PixelOperator8.ttf" id="7_gg585"]
+[ext_resource type="PackedScene" uid="uid://h40vw6uvmcev" path="res://scenes/checkpoint.tscn" id="9_237lw"]
+[ext_resource type="Script" path="res://scripts/game_manager.gd" id="9_wmh0f"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_q7gtx"]
 
@@ -221,7 +222,7 @@ distance = -12.0
 
 [node name="GameManager" type="Node2D" parent="."]
 unique_name_in_owner = true
-script = ExtResource("1_78xic")
+script = ExtResource("9_wmh0f")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_0hdq2")
@@ -240,8 +241,10 @@ tile_map_data = PackedByteArray("AADq//7/AQAAAA0AAADq////AQAAAA0AAADq/wAAAQAAAA0
 tile_set = SubResource("TileSet_0hdq2")
 
 [node name="Player" parent="." instance=ExtResource("1_3tlim")]
+unique_name_in_owner = true
 position = Vector2(-10, 20)
 collision_layer = 2
+collision_mask = 7
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(0, -1)
@@ -274,7 +277,7 @@ position = Vector2(41, 34)
 position = Vector2(158, 33)
 
 [node name="Coin4" parent="Coins" instance=ExtResource("4_hulqd")]
-position = Vector2(177, 33)
+position = Vector2(121, 34)
 
 [node name="Coin5" parent="Coins" instance=ExtResource("4_hulqd")]
 position = Vector2(230, 33)
@@ -291,9 +294,9 @@ position = Vector2(458, 34)
 [node name="Coin9" parent="Coins" instance=ExtResource("4_hulqd")]
 position = Vector2(265, 53)
 
-[node name="Killzone" parent="." instance=ExtResource("5_ff216")]
+[node name="WorldKillzone" parent="." instance=ExtResource("5_ff216")]
 
-[node name="WorldBoundry" type="CollisionShape2D" parent="Killzone"]
+[node name="WorldBoundry" type="CollisionShape2D" parent="WorldKillzone"]
 position = Vector2(-1, 101)
 shape = SubResource("WorldBoundaryShape2D_5mqkf")
 
@@ -346,3 +349,14 @@ text = "You collected no coins :c "
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="Checkpoints" type="Node" parent="."]
+
+[node name="Checkpoint" parent="Checkpoints" instance=ExtResource("9_237lw")]
+position = Vector2(182, 26)
+
+[node name="Checkpoint2" parent="Checkpoints" instance=ExtResource("9_237lw")]
+position = Vector2(554, 26)
+
+[connection signal="body_entered" from="Checkpoints/Checkpoint" to="Checkpoints/Checkpoint" method="_on_body_entered"]
+[connection signal="body_entered" from="Checkpoints/Checkpoint2" to="Checkpoints/Checkpoint2" method="_on_body_entered"]

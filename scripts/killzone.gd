@@ -1,12 +1,12 @@
 extends Area2D
 
 @onready var timer: Timer = $Timer
+@onready var player: CharacterBody2D = get_tree().current_scene.get_node("Player")
 
 func _on_body_entered(body: Node2D) -> void:
-	print("You deer!")
 	timer.start()
 	
 
 
 func _on_timer_timeout() -> void:
-	get_tree().reload_current_scene()
+	player.position = PlayerData.last_checkpoint

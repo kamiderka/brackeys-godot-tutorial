@@ -1,8 +1,11 @@
 extends Node2D
 
-var score = 0
-
+@onready var player: CharacterBody2D = $"../Player"
 @onready var score_label: Label = $"../Labels/ScoreLabel"
+
+@onready var checkpoint :Vector2 = player.get_position()
+var score :int = 0
+
 
 # Called when the node enters the scene tree for the first time.
 func add_point() -> void:
